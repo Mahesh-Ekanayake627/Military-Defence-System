@@ -13,9 +13,12 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
     public void update(boolean areastatus){
         lblArea.setText(areastatus ? "Area Clear" : "Area Not Clear");
     }
+    
+    @Override
+    public void recivemassage(String message){
+        jTextmessage.setText("Main : "+ message);
+    }
 
-    
-    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Helicopter.class.getName());
 
     /**
@@ -41,7 +44,7 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextmessage = new javax.swing.JTextArea();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -70,9 +73,9 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
 
         jButton3.setText("Laser Operation");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextmessage.setColumns(20);
+        jTextmessage.setRows(5);
+        jScrollPane1.setViewportView(jTextmessage);
 
         jButton4.setText("Send");
 
@@ -199,8 +202,8 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea jTextmessage;
     private javax.swing.JLabel lblArea;
     private java.awt.List list2;
     // End of variables declaration//GEN-END:variables
