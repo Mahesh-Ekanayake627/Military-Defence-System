@@ -4,6 +4,8 @@
  */
 package defence.system;
 
+import java.awt.Color;
+
 /**
  *
  * @author ASUS
@@ -18,14 +20,40 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
     public void recivemassage(String message){
         jTextmessage.setText("Main : "+ message);
     }
-
+    
+    //Access Maincontroller,create reference variable
+    private MainController mainController;
+    
+    public void reciveslidervalue(int slidervalue){
+        if(positioncheckbox.isSelected() && slidervalue>=60){
+            jButton_helicopter1.setEnabled(true);
+            jButton_helicopter2.setEnabled(true);
+            jButton_helicopter3.setEnabled(true); 
+        }else if(positioncheckbox.isSelected() && slidervalue>=40){
+            jButton_helicopter1.setEnabled(true);
+            jButton_helicopter2.setEnabled(true);
+        }else if(positioncheckbox.isSelected() && slidervalue>=20){
+            jButton_helicopter1.setEnabled(true);
+        }else{
+            jButton_helicopter1.setEnabled(false);
+            jButton_helicopter2.setEnabled(false);
+            jButton_helicopter3.setEnabled(false);
+        }
+    }
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Helicopter.class.getName());
 
     /**
      * Creates new form Helicopter
      */
-    public Helicopter() {
+    
+    //get reference using Constructor
+    public Helicopter(MainController mainController) {
         initComponents();
+        jButton_helicopter1.setEnabled(false);
+        jButton_helicopter2.setEnabled(false);
+        jButton_helicopter3.setEnabled(false);
+        this.mainController=mainController;
     }
 
     /**
@@ -40,18 +68,18 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         list2 = new java.awt.List();
         jSlider1 = new javax.swing.JSlider();
         lblArea = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton_helicopter1 = new javax.swing.JButton();
+        jButton_helicopter2 = new javax.swing.JButton();
+        jButton_helicopter3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextmessage = new javax.swing.JTextArea();
-        jButton4 = new javax.swing.JButton();
+        jSendButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        checkbox1 = new java.awt.Checkbox();
-        jTextField1 = new javax.swing.JTextField();
+        jHelicopter_textmessage = new javax.swing.JTextField();
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
+        positioncheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Helicopter");
@@ -67,24 +95,26 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         lblArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblArea.setText("Area Not Cleared");
 
-        jButton1.setText("Shoot");
+        jButton_helicopter1.setText("Shoot");
+        jButton_helicopter1.addActionListener(this::jButton_helicopter1ActionPerformed);
 
-        jButton2.setText("Missile Operation");
+        jButton_helicopter2.setText("Missile Operation");
 
-        jButton3.setText("Laser Operation");
+        jButton_helicopter3.setText("Laser Operation");
 
         jTextmessage.setColumns(20);
         jTextmessage.setRows(5);
         jScrollPane1.setViewportView(jTextmessage);
 
-        jButton4.setText("Send");
+        jSendButton.setText("Send");
+        jSendButton.addActionListener(this::jSendButtonActionPerformed);
 
         jLabel2.setText("Soldier Count");
 
         jLabel3.setText("Ammo Count");
 
-        checkbox1.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        checkbox1.setLabel("Position");
+        positioncheckbox.setText("Position");
+        positioncheckbox.addActionListener(this::positioncheckboxActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,30 +126,31 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_helicopter1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
+                                .addComponent(jButton_helicopter2))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(64, 64, 64)
                                 .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                            .addComponent(jButton_helicopter3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(100, 100, 100)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                            .addComponent(positioncheckbox))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1)
+                                .addComponent(jHelicopter_textmessage)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4))
+                                .addComponent(jSendButton))
                             .addComponent(jScrollPane1))
                         .addGap(27, 27, 27)))
                 .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,8 +168,8 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
                                 .addComponent(lblArea)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jButton_helicopter1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton_helicopter2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
@@ -148,22 +179,38 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
                                     .addComponent(jLabel3)
                                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(3, 3, 3)))
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(positioncheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_helicopter3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jSendButton)
+                            .addComponent(jHelicopter_textmessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSendButtonActionPerformed
+       String message=jHelicopter_textmessage.getText();
+       mainController.receive_helicopter_message(message);
+       jHelicopter_textmessage.setText("");
+        
+       
+       
+    }//GEN-LAST:event_jSendButtonActionPerformed
+
+    private void jButton_helicopter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_helicopter1ActionPerformed
+        
+    }//GEN-LAST:event_jButton_helicopter1ActionPerformed
+
+    private void positioncheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positioncheckboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_positioncheckboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,24 +234,24 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Helicopter().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new Helicopter().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Checkbox checkbox1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton_helicopter1;
+    private javax.swing.JButton jButton_helicopter2;
+    private javax.swing.JButton jButton_helicopter3;
+    private javax.swing.JTextField jHelicopter_textmessage;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jSendButton;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextArea jTextmessage;
     private javax.swing.JLabel lblArea;
     private java.awt.List list2;
+    private javax.swing.JCheckBox positioncheckbox;
     // End of variables declaration//GEN-END:variables
 }

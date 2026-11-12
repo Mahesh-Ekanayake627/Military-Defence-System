@@ -18,13 +18,43 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         jTextmessage.setText("Main : "+ message);
     }
     
+    private MainController mainController;
+    
+     public void reciveslidervalue(int slidervalue){
+        if(positioncheckbox.isSelected() && slidervalue>=80){
+            jTank_Button1.setEnabled(true);
+            jTank_Button2.setEnabled(true);
+            jTank_Button3.setEnabled(true);
+            jTank_Button4.setEnabled(true);
+        }else if(positioncheckbox.isSelected() && slidervalue>=60){
+            jTank_Button1.setEnabled(true);
+            jTank_Button2.setEnabled(true);
+            jTank_Button3.setEnabled(true);
+        }else if(positioncheckbox.isSelected() && slidervalue>=40){
+            jTank_Button1.setEnabled(true);
+            jTank_Button2.setEnabled(true); 
+        }else if(positioncheckbox.isSelected() && slidervalue>=20){
+            jTank_Button1.setEnabled(true);
+        }else{
+            jTank_Button1.setEnabled(false);
+            jTank_Button2.setEnabled(false);
+            jTank_Button3.setEnabled(false);
+            jTank_Button4.setEnabled(false); 
+        }
+    }
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tank.class.getName());
 
     /**
      * Creates new form Tank
      */
-    public Tank() {
+    public Tank(MainController mainController) {
         initComponents();
+        jTank_Button1.setEnabled(false);
+        jTank_Button2.setEnabled(false);
+        jTank_Button3.setEnabled(false);
+        jTank_Button4.setEnabled(false);
+        this.mainController = mainController;
     }
 
     /**
@@ -38,19 +68,19 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextmessage = new javax.swing.JTextArea();
-        jTextField1 = new javax.swing.JTextField();
+        jTank_textmessage = new javax.swing.JTextField();
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        checkbox1 = new java.awt.Checkbox();
         jSlider1 = new javax.swing.JSlider();
         lblArea = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jTank_Button1 = new javax.swing.JButton();
+        jTank_Button2 = new javax.swing.JButton();
+        jTank_Button3 = new javax.swing.JButton();
+        jTank_Button4 = new javax.swing.JButton();
+        positioncheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tank");
@@ -61,13 +91,11 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         jScrollPane1.setViewportView(jTextmessage);
 
         jButton4.setText("Send");
+        jButton4.addActionListener(this::jButton4ActionPerformed);
 
         jLabel2.setText("Soldier Count");
 
         jLabel3.setText("Ammo Count");
-
-        checkbox1.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        checkbox1.setLabel("Position");
 
         jSlider1.setBackground(new java.awt.Color(255, 255, 255));
         jSlider1.setMajorTickSpacing(20);
@@ -80,13 +108,15 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         lblArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblArea.setText("Area Not Cleared");
 
-        jButton1.setText("Shoot");
+        jTank_Button1.setText("Shoot");
 
-        jButton2.setText("Missile Operation");
+        jTank_Button2.setText("Missile Operation");
 
-        jButton3.setText("Redar Operation");
+        jTank_Button3.setText("Redar Operation");
 
-        jButton5.setText("Rotate Shooting");
+        jTank_Button4.setText("Rotate Shooting");
+
+        positioncheckbox.setText("Position");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,31 +129,32 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTank_Button3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jTank_Button4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTank_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton2)))
+                                    .addComponent(jTank_Button2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(62, 92, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(checkbox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                            .addComponent(positioncheckbox))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1)
+                                .addComponent(jTank_textmessage)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton4))
                             .addComponent(jScrollPane1))
@@ -143,8 +174,8 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
                                 .addComponent(lblArea)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTank_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTank_Button2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
@@ -155,21 +186,29 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
                                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(3, 3, 3)))
                         .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTank_Button3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                                .addComponent(jTank_Button4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(positioncheckbox))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTank_textmessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String message=jTank_textmessage.getText();
+        mainController.receive_Tank_message(message);
+        jTank_textmessage.setText("");
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,24 +232,24 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Tank().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new Tank().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Checkbox checkbox1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jTank_Button1;
+    private javax.swing.JButton jTank_Button2;
+    private javax.swing.JButton jTank_Button3;
+    private javax.swing.JButton jTank_Button4;
+    private javax.swing.JTextField jTank_textmessage;
     private javax.swing.JTextArea jTextmessage;
     private javax.swing.JLabel lblArea;
+    private javax.swing.JCheckBox positioncheckbox;
     // End of variables declaration//GEN-END:variables
 }
