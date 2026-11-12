@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package defence.system;
-
+interface AreaStatusObserver{
+    void update(boolean areastatus);
+}
 /**
  *
  * @author ASUS
@@ -11,12 +13,45 @@ package defence.system;
 public class MainController extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainController.class.getName());
-
-    /**
-     * Creates new form MainController
-     */
+    private AreaStatusObserver[] ObserverArray=new AreaStatusObserver[0];
+    
+    public void addObserever(AreaStatusObserver ob){
+        extendArray();
+        ObserverArray[ObserverArray.length-1]=ob;
+    }
+    
+    public void extendArray(){
+    AreaStatusObserver[] tempObserverArray=new AreaStatusObserver[ObserverArray.length+1];
+        for(int i=0;i<ObserverArray.length;i++){
+        tempObserverArray[i]=ObserverArray[i];
+        }
+        ObserverArray=tempObserverArray; 
+    }
+    
+    public void updateAreaStatus(boolean areastatus){
+        notifyObserver(areastatus);
+    }
+    
+    public void notifyObserver(boolean areastatus){
+        for(AreaStatusObserver ob:ObserverArray){
+            ob.update(areastatus);
+        }
+    }
+            
     public MainController() {
         initComponents();
+        
+        Helicopter helicopter = new Helicopter();
+        Tank tank = new Tank();
+        Submarine submarine = new Submarine();
+        
+        addObserever(helicopter);
+        addObserever(tank);
+        addObserever(submarine);
+        
+        helicopter.setVisible(true);
+        tank.setVisible(true);
+        submarine.setVisible(true);
     }
 
     /**
@@ -42,7 +77,7 @@ public class MainController extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
         checkbox1 = new java.awt.Checkbox();
-        checkbox2 = new java.awt.Checkbox();
+        Areastatus = new java.awt.Checkbox();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,7 +116,13 @@ public class MainController extends javax.swing.JFrame {
 
         checkbox1.setLabel("Send Private");
 
-        checkbox2.setLabel("Area Clear");
+        Areastatus.setLabel("Area Clear");
+        Areastatus.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                AreastatusComponentShown(evt);
+            }
+        });
+        Areastatus.addItemListener(this::AreastatusItemStateChanged);
 
         jButton2.setText("Send");
 
@@ -99,7 +140,7 @@ public class MainController extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1)
                                 .addGap(53, 53, 53)
-                                .addComponent(checkbox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Areastatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -131,7 +172,7 @@ public class MainController extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkbox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Areastatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -162,10 +203,21 @@ public class MainController extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AreastatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AreastatusItemStateChanged
+        // TODO add your handling code her
+        boolean areastatus = Areastatus.getState();
+        updateAreaStatus(areastatus);
+    }//GEN-LAST:event_AreastatusItemStateChanged
+
+    private void AreastatusComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AreastatusComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AreastatusComponentShown
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -185,11 +237,12 @@ public class MainController extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainController().setVisible(true));
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Checkbox Areastatus;
     private java.awt.Checkbox checkbox1;
-    private java.awt.Checkbox checkbox2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;

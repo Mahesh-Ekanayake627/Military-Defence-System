@@ -8,7 +8,12 @@ package defence.system;
  *
  * @author ASUS
  */
-public class Tank extends javax.swing.JFrame {
+public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
+    @Override
+   public void update(boolean areastatus){
+      lblArea.setText(areastatus ? "Area Clear" : "Area Not Clear");
+   }
+
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tank.class.getName());
 
@@ -38,7 +43,7 @@ public class Tank extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         checkbox1 = new java.awt.Checkbox();
         jSlider1 = new javax.swing.JSlider();
-        jLabel1 = new javax.swing.JLabel();
+        lblArea = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -69,8 +74,8 @@ public class Tank extends javax.swing.JFrame {
         jSlider1.setPaintTicks(true);
         jSlider1.setValue(0);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Area Not Cleared");
+        lblArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblArea.setText("Area Not Cleared");
 
         jButton1.setText("Shoot");
 
@@ -100,7 +105,7 @@ public class Tank extends javax.swing.JFrame {
                                     .addComponent(jButton2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(62, 92, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -132,7 +137,7 @@ public class Tank extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(lblArea)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,7 +200,6 @@ public class Tank extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -204,5 +208,6 @@ public class Tank extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblArea;
     // End of variables declaration//GEN-END:variables
 }
