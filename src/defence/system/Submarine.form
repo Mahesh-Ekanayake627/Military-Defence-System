@@ -46,7 +46,6 @@
                                       <Component id="jSubmarine_Button4" min="-2" pref="123" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="positioncheckbox" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jSubmarine_Button2" min="-2" pref="123" max="-2" attributes="0"/>

@@ -21,6 +21,11 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         jTextmessage.setText("Main : "+ message);
     }
     
+    @Override
+    public void reciveprivatemassage(String privatemessage){    
+        jTextmessage.setText(privatemessage);    
+    }
+    
     //Access Maincontroller,create reference variable
     private MainController mainController;
     

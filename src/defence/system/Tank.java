@@ -17,6 +17,11 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
     public void recivemassage(String message){
         jTextmessage.setText("Main : "+ message);
     }
+    @Override
+    public void reciveprivatemassage(String privatemessage){    
+        jTextmessage.setText(privatemessage);    
+    }
+   
     
     private MainController mainController;
     

@@ -7,6 +7,7 @@ interface AreaStatusObserver{
     void update(boolean areastatus);
     void recivemassage(String message);
     void reciveslidervalue(int slidervalue);
+    void reciveprivatemassage(String message);
 }
 /**
  *
@@ -89,14 +90,13 @@ public class MainController extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSlider2 = new javax.swing.JSlider();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Select_DefenceBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         Jmessagearea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         Jmessagearea2 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         textAreamassage = new javax.swing.JTextArea();
-        checkbox1 = new java.awt.Checkbox();
         Areastatus = new java.awt.Checkbox();
         btnSend = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -104,6 +104,7 @@ public class MainController extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MainController");
@@ -131,7 +132,7 @@ public class MainController extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Defence", "Helicopter", "Tank", "Submarine" }));
+        Select_DefenceBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Defence", "Helicopter", "Tank", "Submarine" }));
 
         Jmessagearea1.setColumns(20);
         Jmessagearea1.setRows(5);
@@ -144,8 +145,6 @@ public class MainController extends javax.swing.JFrame {
         textAreamassage.setColumns(20);
         textAreamassage.setRows(5);
         jScrollPane3.setViewportView(textAreamassage);
-
-        checkbox1.setLabel("Send Private");
 
         Areastatus.setLabel("Area Clear");
         Areastatus.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -168,6 +167,9 @@ public class MainController extends javax.swing.JFrame {
 
         jLabel7.setText("Tank  Message Box");
 
+        jCheckBox1.setText("Sent private");
+        jCheckBox1.addActionListener(this::jCheckBox1ActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,7 +180,7 @@ public class MainController extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Select_DefenceBox, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1)
                                 .addGap(53, 53, 53)
@@ -192,13 +194,13 @@ public class MainController extends javax.swing.JFrame {
                                     .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(71, 71, 71)
+                                        .addComponent(btnSend))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(71, 71, 71)
-                                        .addComponent(btnSend))))))
+                                            .addComponent(jCheckBox1)
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -220,7 +222,7 @@ public class MainController extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Select_DefenceBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Areastatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -230,19 +232,19 @@ public class MainController extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jCheckBox1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(40, 40, 40)
                         .addComponent(btnSend)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -271,11 +273,26 @@ public class MainController extends javax.swing.JFrame {
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
        String message=textAreamassage.getText();
+       if(jCheckBox1.isSelected()){
+        //private message
+        String Selected = Select_DefenceBox.getSelectedItem().toString();
        
-       //message all UI object using  ObserverArray
-       for(AreaStatusObserver ob : ObserverArray ){
-           ob.recivemassage(message);
-       }
+        for(AreaStatusObserver ob1 : ObserverArray){
+            if(Selected.equals("Helicopter") && jCheckBox1.isSelected()  && ob1 instanceof Helicopter){
+                //meaning(ob1 instanceof Helicopter) --> check ob1 object Belonging to Helicopter class
+                ob1.reciveprivatemassage(message);
+            }else if(Selected.equals("Submarine") && jCheckBox1.isSelected()  && ob1 instanceof Submarine ){
+                ob1.reciveprivatemassage(message);
+            }else if(Selected.equals("Tank") && jCheckBox1.isSelected()  && ob1 instanceof Tank){
+                ob1.reciveprivatemassage(message);
+            }
+        } 
+        }else{
+            //message all UI object using  ObserverArray
+            for(AreaStatusObserver ob : ObserverArray ){
+                ob.recivemassage(message);
+            }
+        }        
        textAreamassage.setText("");
     }//GEN-LAST:event_btnSendActionPerformed
 
@@ -290,6 +307,10 @@ public class MainController extends javax.swing.JFrame {
             ob.reciveslidervalue(slidervalue);
         }  
     }//GEN-LAST:event_jSlider2StateChanged
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,10 +344,10 @@ public class MainController extends javax.swing.JFrame {
     private javax.swing.JTextArea Jmessagearea1;
     private javax.swing.JTextArea Jmessagearea2;
     private javax.swing.JTextArea Jmessagearea3;
+    private javax.swing.JComboBox<String> Select_DefenceBox;
     private javax.swing.JButton btnSend;
-    private java.awt.Checkbox checkbox1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

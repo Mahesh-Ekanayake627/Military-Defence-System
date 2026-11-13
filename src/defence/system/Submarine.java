@@ -20,6 +20,11 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
         jTextmessage.setText("Main : "+ message);
     }
     
+    @Override
+    public void reciveprivatemassage(String privatemessage){    
+        jTextmessage.setText(privatemessage);    
+    }
+    
     private MainController mainController;
 
     public void reciveslidervalue(int slidervalue){
