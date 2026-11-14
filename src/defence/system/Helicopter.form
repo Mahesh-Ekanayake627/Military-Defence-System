@@ -53,8 +53,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jSpinner1" min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Component id="jSpinner2" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jSpinnersodiercount" min="-2" pref="52" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerammocount" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="positioncheckbox" min="-2" max="-2" attributes="0"/>
@@ -97,12 +97,12 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnersodiercount" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jSpinner2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerammocount" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           </Group>
@@ -137,7 +137,7 @@
         <Property name="orientation" type="int" value="1"/>
         <Property name="paintLabels" type="boolean" value="true"/>
         <Property name="paintTicks" type="boolean" value="true"/>
-        <Property name="value" type="int" value="0"/>
+        <Property name="value" type="int" value="100"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblArea">
@@ -160,11 +160,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Missile Operation"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_helicopter2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton_helicopter3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Laser Operation"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_helicopter3ActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -201,9 +207,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jHelicopter_textmessage">
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner1">
+    <Component class="javax.swing.JSpinner" name="jSpinnersodiercount">
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner2">
+    <Component class="javax.swing.JSpinner" name="jSpinnerammocount">
     </Component>
     <Component class="javax.swing.JCheckBox" name="positioncheckbox">
       <Properties>

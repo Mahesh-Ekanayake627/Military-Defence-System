@@ -21,6 +21,9 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
     public void reciveprivatemassage(String privatemessage){    
         jTextmessage.setText(privatemessage);    
     }
+    
+    private int soldiercount=5;
+    private int ammocount=500;
    
     
     private MainController mainController;
@@ -55,11 +58,16 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
      */
     public Tank(MainController mainController) {
         initComponents();
+        this.mainController = mainController;
+        
         jTank_Button1.setEnabled(false);
         jTank_Button2.setEnabled(false);
         jTank_Button3.setEnabled(false);
         jTank_Button4.setEnabled(false);
-        this.mainController = mainController;
+        
+        jSpinnersoldier.setValue(soldiercount);
+        jSpinnerammo.setValue(ammocount);
+        
     }
 
     /**
@@ -74,8 +82,8 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextmessage = new javax.swing.JTextArea();
         jTank_textmessage = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
+        jSpinnersoldier = new javax.swing.JSpinner();
+        jSpinnerammo = new javax.swing.JSpinner();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -108,18 +116,22 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setPaintLabels(true);
         jSlider1.setPaintTicks(true);
-        jSlider1.setValue(0);
+        jSlider1.setValue(100);
 
         lblArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblArea.setText("Area Not Cleared");
 
         jTank_Button1.setText("Shoot");
+        jTank_Button1.addActionListener(this::jTank_Button1ActionPerformed);
 
         jTank_Button2.setText("Missile Operation");
+        jTank_Button2.addActionListener(this::jTank_Button2ActionPerformed);
 
         jTank_Button3.setText("Redar Operation");
+        jTank_Button3.addActionListener(this::jTank_Button3ActionPerformed);
 
         jTank_Button4.setText("Rotate Shooting");
+        jTank_Button4.addActionListener(this::jTank_Button4ActionPerformed);
 
         positioncheckbox.setText("Position");
 
@@ -152,8 +164,8 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                                    .addComponent(jSpinnersoldier, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerammo, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                             .addComponent(positioncheckbox))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
@@ -184,11 +196,11 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSpinnersoldier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(15, 15, 15)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSpinnerammo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(3, 3, 3)))
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,6 +226,34 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         jTank_textmessage.setText("");
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTank_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTank_Button1ActionPerformed
+       if(soldiercount > 0 ){
+           ammocount -= 1;
+           jSpinnerammo.setValue(ammocount);
+       }
+    }//GEN-LAST:event_jTank_Button1ActionPerformed
+
+    private void jTank_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTank_Button2ActionPerformed
+        if(soldiercount > 0 ){
+           ammocount -= 1;
+           jSpinnerammo.setValue(ammocount);
+       }
+    }//GEN-LAST:event_jTank_Button2ActionPerformed
+
+    private void jTank_Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTank_Button3ActionPerformed
+        if(soldiercount > 0 ){
+           ammocount -= 1;
+           jSpinnerammo.setValue(ammocount);
+       }
+    }//GEN-LAST:event_jTank_Button3ActionPerformed
+
+    private void jTank_Button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTank_Button4ActionPerformed
+       if(soldiercount > 0 ){
+           ammocount -= 1;
+           jSpinnerammo.setValue(ammocount);
+       }
+    }//GEN-LAST:event_jTank_Button4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,8 +286,8 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinnerammo;
+    private javax.swing.JSpinner jSpinnersoldier;
     private javax.swing.JButton jTank_Button1;
     private javax.swing.JButton jTank_Button2;
     private javax.swing.JButton jTank_Button3;

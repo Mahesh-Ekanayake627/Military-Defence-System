@@ -18,9 +18,9 @@ public class MainController extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainController.class.getName());
     private AreaStatusObserver[] ObserverArray=new AreaStatusObserver[0];
     
-    public void addObserever(AreaStatusObserver ob){
+    public void addObserever(AreaStatusObserver areaStatusObserver){
         extendArray();
-        ObserverArray[ObserverArray.length-1]=ob;
+        ObserverArray[ObserverArray.length-1]=areaStatusObserver;
     }
     
     public void extendArray(){
@@ -30,11 +30,6 @@ public class MainController extends javax.swing.JFrame {
         }
         ObserverArray=tempObserverArray; 
     }
-    
-    public void updateAreaStatus(boolean areastatus){
-        notifyObserver(areastatus);
-    }
-    
     public void notifyObserver(boolean areastatus){
         for(AreaStatusObserver ob:ObserverArray){
             ob.update(areastatus);
@@ -110,6 +105,7 @@ public class MainController extends javax.swing.JFrame {
         setTitle("MainController");
 
         jButton1.setText("Collect information");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jLabel1.setText("Soldier Count");
 
@@ -264,7 +260,7 @@ public class MainController extends javax.swing.JFrame {
     private void AreastatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AreastatusItemStateChanged
         // TODO add your handling code her
         boolean areastatus = Areastatus.getState();
-        updateAreaStatus(areastatus);
+        notifyObserver(areastatus);
     }//GEN-LAST:event_AreastatusItemStateChanged
 
     private void AreastatusComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AreastatusComponentShown
@@ -311,6 +307,10 @@ public class MainController extends javax.swing.JFrame {
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
             // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

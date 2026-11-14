@@ -26,6 +26,9 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
     }
     
     private MainController mainController;
+    
+    private int soldiercount=150;
+    private int ammocount=1000;
 
     public void reciveslidervalue(int slidervalue){
         if(positioncheckbox.isSelected() && slidervalue>=80){
@@ -62,6 +65,13 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
         jSubmarine_Button2.setEnabled(false);
         jSubmarine_Button3.setEnabled(false);
         jSubmarine_Button4.setEnabled(false);  
+        
+        jSpinnerSolider.setValue(soldiercount);
+        jSpinnerammo.setValue(ammocount);
+        
+        jSpinnerammo.setEnabled(false);
+        
+        
     }
 
     /**
@@ -76,8 +86,8 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextmessage = new javax.swing.JTextArea();
         jSubmarine_textmessage = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
+        jSpinnerSolider = new javax.swing.JSpinner();
+        jSpinnerammo = new javax.swing.JSpinner();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -112,16 +122,19 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setPaintLabels(true);
         jSlider1.setPaintTicks(true);
-        jSlider1.setValue(0);
+        jSlider1.setValue(100);
 
         lblArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblArea.setText("Area Not Cleared");
 
         jSubmarine_Button1.setText("Shoot");
+        jSubmarine_Button1.addActionListener(this::jSubmarine_Button1ActionPerformed);
 
         jSubmarine_Button2.setText("Missile Operation");
+        jSubmarine_Button2.addActionListener(this::jSubmarine_Button2ActionPerformed);
 
         jSubmarine_Button3.setText("Tomahawk Missile");
+        jSubmarine_Button3.addActionListener(this::jSubmarine_Button3ActionPerformed);
 
         jSlider2.setBackground(new java.awt.Color(255, 255, 255));
         jSlider2.setMajorTickSpacing(20);
@@ -129,13 +142,14 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
         jSlider2.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider2.setPaintLabels(true);
         jSlider2.setPaintTicks(true);
-        jSlider2.setValue(0);
+        jSlider2.setValue(100);
 
         jLabel4.setText("Energy");
 
         jLabel5.setText("Oxigen");
 
         jSubmarine_Button4.setText("Trident-2 Missile");
+        jSubmarine_Button4.addActionListener(this::jSubmarine_Button4ActionPerformed);
 
         positioncheckbox.setText("Position");
 
@@ -162,21 +176,20 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jSubmarine_Button4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(positioncheckbox)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(positioncheckbox))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jSubmarine_Button2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jSpinnerammo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSpinnerSolider, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,11 +216,11 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel2)
-                                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jSpinnerSolider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel3)
-                                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jSpinnerammo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(34, 34, 34))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -244,6 +257,38 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
         jSubmarine_textmessage.setText("");   
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jSubmarine_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmarine_Button1ActionPerformed
+        if(soldiercount > 0 && ammocount > 0){
+            ammocount -= 1;
+            
+           jSpinnerammo.setValue(ammocount);
+        }
+    }//GEN-LAST:event_jSubmarine_Button1ActionPerformed
+
+    private void jSubmarine_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmarine_Button2ActionPerformed
+        if(soldiercount > 0 && ammocount > 0){
+            ammocount -= 1;
+            
+           jSpinnerammo.setValue(ammocount);
+        }
+    }//GEN-LAST:event_jSubmarine_Button2ActionPerformed
+
+    private void jSubmarine_Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmarine_Button3ActionPerformed
+        if(soldiercount > 0 && ammocount > 0){
+            ammocount -= 1;
+            
+           jSpinnerammo.setValue(ammocount);
+        }
+    }//GEN-LAST:event_jSubmarine_Button3ActionPerformed
+
+    private void jSubmarine_Button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmarine_Button4ActionPerformed
+        if(soldiercount > 0 && ammocount > 0){
+            ammocount -= 1;
+            
+           jSpinnerammo.setValue(ammocount);
+        }
+    }//GEN-LAST:event_jSubmarine_Button4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,8 +323,8 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinnerSolider;
+    private javax.swing.JSpinner jSpinnerammo;
     private javax.swing.JButton jSubmarine_Button1;
     private javax.swing.JButton jSubmarine_Button2;
     private javax.swing.JButton jSubmarine_Button3;

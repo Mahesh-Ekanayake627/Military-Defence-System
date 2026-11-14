@@ -26,6 +26,9 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         jTextmessage.setText(privatemessage);    
     }
     
+    private int soldiercount=10;
+    private int ammocount=500;
+    
     //Access Maincontroller,create reference variable
     private MainController mainController;
     
@@ -55,10 +58,16 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
     //get reference using Constructor
     public Helicopter(MainController mainController) {
         initComponents();
+        this.mainController=mainController;
+        
         jButton_helicopter1.setEnabled(false);
         jButton_helicopter2.setEnabled(false);
         jButton_helicopter3.setEnabled(false);
-        this.mainController=mainController;
+        
+        jSpinnersodiercount.setValue(soldiercount);
+        jSpinnerammocount.setValue(ammocount);
+              
+        jSpinnerammocount.setEnabled(false);
     }
 
     /**
@@ -82,8 +91,8 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jHelicopter_textmessage = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
+        jSpinnersodiercount = new javax.swing.JSpinner();
+        jSpinnerammocount = new javax.swing.JSpinner();
         positioncheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,7 +104,7 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setPaintLabels(true);
         jSlider1.setPaintTicks(true);
-        jSlider1.setValue(0);
+        jSlider1.setValue(100);
 
         lblArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblArea.setText("Area Not Cleared");
@@ -104,8 +113,10 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         jButton_helicopter1.addActionListener(this::jButton_helicopter1ActionPerformed);
 
         jButton_helicopter2.setText("Missile Operation");
+        jButton_helicopter2.addActionListener(this::jButton_helicopter2ActionPerformed);
 
         jButton_helicopter3.setText("Laser Operation");
+        jButton_helicopter3.addActionListener(this::jButton_helicopter3ActionPerformed);
 
         jTextmessage.setColumns(20);
         jTextmessage.setRows(5);
@@ -146,8 +157,8 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(100, 100, 100)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                                    .addComponent(jSpinnersodiercount, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerammocount, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                             .addComponent(positioncheckbox))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
@@ -178,11 +189,11 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSpinnersodiercount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(15, 15, 15)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSpinnerammocount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(3, 3, 3)))
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,19 +214,36 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
     private void jSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSendButtonActionPerformed
        String message=jHelicopter_textmessage.getText();
        mainController.receive_helicopter_message(message);
-       jHelicopter_textmessage.setText("");
-        
-       
-       
+       jHelicopter_textmessage.setText("");  
     }//GEN-LAST:event_jSendButtonActionPerformed
 
     private void jButton_helicopter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_helicopter1ActionPerformed
-        
+       if(soldiercount > 0 && ammocount > 0){
+            ammocount -= 1;
+            
+           jSpinnerammocount.setValue(ammocount);
+       }
     }//GEN-LAST:event_jButton_helicopter1ActionPerformed
 
     private void positioncheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positioncheckboxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_positioncheckboxActionPerformed
+
+    private void jButton_helicopter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_helicopter2ActionPerformed
+         if(soldiercount > 0 && ammocount >0){
+            ammocount -= 1;
+            
+            jSpinnerammocount.setValue(ammocount);
+         }
+    }//GEN-LAST:event_jButton_helicopter2ActionPerformed
+
+    private void jButton_helicopter3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_helicopter3ActionPerformed
+        if(soldiercount > 0 && ammocount >0){
+            ammocount -= 1;
+            
+            jSpinnerammocount.setValue(ammocount);
+        }
+    }//GEN-LAST:event_jButton_helicopter3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,8 +280,8 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jSendButton;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinnerammocount;
+    private javax.swing.JSpinner jSpinnersodiercount;
     private javax.swing.JTextArea jTextmessage;
     private javax.swing.JLabel lblArea;
     private java.awt.List list2;
