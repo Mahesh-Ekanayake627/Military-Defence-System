@@ -26,11 +26,18 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         jTextmessage.setText(privatemessage);    
     }
     
-    private int soldiercount=10;
-    private int ammocount=500;
+    private int helisoldiercount=10;
+    private int heliammocount=500;
     
     //Access Maincontroller,create reference variable
     private MainController mainController;
+    
+    public int getsoldiercount(){
+        return helisoldiercount;
+    }
+    public int getammocount(){
+        return heliammocount;
+    }
     
     public void reciveslidervalue(int slidervalue){
         if(positioncheckbox.isSelected() && slidervalue>=60){
@@ -48,7 +55,7 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
             jButton_helicopter3.setEnabled(false);
         }
     }
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Helicopter.class.getName());
 
     /**
@@ -64,8 +71,8 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
         jButton_helicopter2.setEnabled(false);
         jButton_helicopter3.setEnabled(false);
         
-        jSpinnersodiercount.setValue(soldiercount);
-        jSpinnerammocount.setValue(ammocount);
+        jSpinnersodiercount.setValue(helisoldiercount);
+        jSpinnerammocount.setValue(heliammocount);
               
         jSpinnerammocount.setEnabled(false);
     }
@@ -218,10 +225,10 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
     }//GEN-LAST:event_jSendButtonActionPerformed
 
     private void jButton_helicopter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_helicopter1ActionPerformed
-       if(soldiercount > 0 && ammocount > 0){
-            ammocount -= 1;
+       if(helisoldiercount > 0 && heliammocount > 0){
+            heliammocount -= 1;
             
-           jSpinnerammocount.setValue(ammocount);
+           jSpinnerammocount.setValue(heliammocount);
        }
     }//GEN-LAST:event_jButton_helicopter1ActionPerformed
 
@@ -230,18 +237,18 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
     }//GEN-LAST:event_positioncheckboxActionPerformed
 
     private void jButton_helicopter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_helicopter2ActionPerformed
-         if(soldiercount > 0 && ammocount >0){
-            ammocount -= 1;
+         if(helisoldiercount > 0 && heliammocount >0){
+            heliammocount -= 1;
             
-            jSpinnerammocount.setValue(ammocount);
+            jSpinnerammocount.setValue(heliammocount);
          }
     }//GEN-LAST:event_jButton_helicopter2ActionPerformed
 
     private void jButton_helicopter3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_helicopter3ActionPerformed
-        if(soldiercount > 0 && ammocount >0){
-            ammocount -= 1;
+        if(helisoldiercount > 0 && heliammocount >0){
+            heliammocount -= 1;
             
-            jSpinnerammocount.setValue(ammocount);
+            jSpinnerammocount.setValue(heliammocount);
         }
     }//GEN-LAST:event_jButton_helicopter3ActionPerformed
 

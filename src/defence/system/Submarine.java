@@ -27,8 +27,15 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
     
     private MainController mainController;
     
-    private int soldiercount=150;
-    private int ammocount=1000;
+    private int subsoldiercount=150;
+    private int  subammocount=1000;
+    
+    public int getsoldiercount(){
+        return  subsoldiercount;
+    }
+    public int getammocount(){
+        return  subammocount;
+    }
 
     public void reciveslidervalue(int slidervalue){
         if(positioncheckbox.isSelected() && slidervalue>=80){
@@ -66,8 +73,8 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
         jSubmarine_Button3.setEnabled(false);
         jSubmarine_Button4.setEnabled(false);  
         
-        jSpinnerSolider.setValue(soldiercount);
-        jSpinnerammo.setValue(ammocount);
+        jSpinnerSolider.setValue( subsoldiercount);
+        jSpinnerammo.setValue( subammocount);
         
         jSpinnerammo.setEnabled(false);
         
@@ -258,34 +265,34 @@ public class Submarine extends javax.swing.JFrame implements AreaStatusObserver{
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jSubmarine_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmarine_Button1ActionPerformed
-        if(soldiercount > 0 && ammocount > 0){
-            ammocount -= 1;
+        if( subsoldiercount > 0 &&  subammocount > 0){
+             subammocount -= 1;
             
-           jSpinnerammo.setValue(ammocount);
+           jSpinnerammo.setValue( subammocount);
         }
     }//GEN-LAST:event_jSubmarine_Button1ActionPerformed
 
     private void jSubmarine_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmarine_Button2ActionPerformed
-        if(soldiercount > 0 && ammocount > 0){
-            ammocount -= 1;
+        if( subsoldiercount > 0 &&  subammocount > 0){
+             subammocount -= 1;
             
-           jSpinnerammo.setValue(ammocount);
+           jSpinnerammo.setValue( subammocount);
         }
     }//GEN-LAST:event_jSubmarine_Button2ActionPerformed
 
     private void jSubmarine_Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmarine_Button3ActionPerformed
-        if(soldiercount > 0 && ammocount > 0){
-            ammocount -= 1;
+        if( subsoldiercount > 0 &&  subammocount > 0){
+             subammocount -= 1;
             
-           jSpinnerammo.setValue(ammocount);
+           jSpinnerammo.setValue( subammocount);
         }
     }//GEN-LAST:event_jSubmarine_Button3ActionPerformed
 
     private void jSubmarine_Button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmarine_Button4ActionPerformed
-        if(soldiercount > 0 && ammocount > 0){
-            ammocount -= 1;
+        if( subsoldiercount > 0 &&  subammocount > 0){
+             subammocount -= 1;
             
-           jSpinnerammo.setValue(ammocount);
+           jSpinnerammo.setValue( subammocount);
         }
     }//GEN-LAST:event_jSubmarine_Button4ActionPerformed
 

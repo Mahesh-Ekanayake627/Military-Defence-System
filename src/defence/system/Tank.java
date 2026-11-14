@@ -22,11 +22,17 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         jTextmessage.setText(privatemessage);    
     }
     
-    private int soldiercount=5;
-    private int ammocount=500;
-   
-    
+    private int tanksoldiercount=5;
+    private int tankammocount=500;
+
     private MainController mainController;
+    
+    public int getsoldiercount(){
+        return tanksoldiercount;
+    }
+    public int getammocount(){
+        return tankammocount;
+    }
     
      public void reciveslidervalue(int slidervalue){
         if(positioncheckbox.isSelected() && slidervalue>=80){
@@ -65,8 +71,8 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
         jTank_Button3.setEnabled(false);
         jTank_Button4.setEnabled(false);
         
-        jSpinnersoldier.setValue(soldiercount);
-        jSpinnerammo.setValue(ammocount);
+        jSpinnersoldier.setValue(tanksoldiercount);
+        jSpinnerammo.setValue(tankammocount);
         
     }
 
@@ -228,30 +234,30 @@ public class Tank extends javax.swing.JFrame implements AreaStatusObserver{
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTank_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTank_Button1ActionPerformed
-       if(soldiercount > 0 ){
-           ammocount -= 1;
-           jSpinnerammo.setValue(ammocount);
+       if(tanksoldiercount > 0 ){
+           tankammocount -= 1;
+           jSpinnerammo.setValue(tankammocount);
        }
     }//GEN-LAST:event_jTank_Button1ActionPerformed
 
     private void jTank_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTank_Button2ActionPerformed
-        if(soldiercount > 0 ){
-           ammocount -= 1;
-           jSpinnerammo.setValue(ammocount);
+        if(tanksoldiercount > 0 ){
+           tankammocount -= 1;
+           jSpinnerammo.setValue(tankammocount);
        }
     }//GEN-LAST:event_jTank_Button2ActionPerformed
 
     private void jTank_Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTank_Button3ActionPerformed
-        if(soldiercount > 0 ){
-           ammocount -= 1;
-           jSpinnerammo.setValue(ammocount);
+        if(tanksoldiercount > 0 ){
+           tankammocount -= 1;
+           jSpinnerammo.setValue(tankammocount);
        }
     }//GEN-LAST:event_jTank_Button3ActionPerformed
 
     private void jTank_Button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTank_Button4ActionPerformed
-       if(soldiercount > 0 ){
-           ammocount -= 1;
-           jSpinnerammo.setValue(ammocount);
+       if(tanksoldiercount > 0 ){
+           tankammocount -= 1;
+           jSpinnerammo.setValue(tankammocount);
        }
     }//GEN-LAST:event_jTank_Button4ActionPerformed
 
