@@ -62,7 +62,7 @@ public class Helicopter extends javax.swing.JFrame implements AreaStatusObserver
      * Creates new form Helicopter
      */
     
-    //get reference using Constructor
+    //get Maincontroller reference using Constructor
     public Helicopter(MainController mainController) {
         initComponents();
         this.mainController=mainController;

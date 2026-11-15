@@ -14,12 +14,12 @@ interface AreaStatusObserver{
  * @author ASUS
  */
 public class MainController extends javax.swing.JFrame {
-    
+private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainController.class.getName());
+
     private Helicopter helicopter;
     private Submarine submarine;
     private Tank tank;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainController.class.getName());
     private AreaStatusObserver[] ObserverArray=new AreaStatusObserver[0];
     
     public void addObserever(AreaStatusObserver areaStatusObserver){
@@ -297,7 +297,6 @@ public class MainController extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AreastatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AreastatusItemStateChanged
-        // TODO add your handling code her
         boolean areastatus = Areastatus.getState();
         notifyObserver(areastatus);
     }//GEN-LAST:event_AreastatusItemStateChanged
@@ -336,7 +335,7 @@ public class MainController extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider2ComponentShown
 
     private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
-       int slidervalue=jSlider2.getValue();
+        int slidervalue=jSlider2.getValue();
         
         for(AreaStatusObserver ob : ObserverArray){
             ob.reciveslidervalue(slidervalue);
